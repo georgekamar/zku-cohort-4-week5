@@ -8,7 +8,7 @@ include "./hasher.circom";
 template DualMux() {
     signal input in[2];
     signal input s;
-    signal output out[2]; 
+    signal output out[2];
 
     s * (1 - s) === 0;
     out[0] <== (in[1] - in[0])*s + in[0];
@@ -47,6 +47,14 @@ template ManyMerkleTreeChecker(levels, length, nInputs) {
     // [assignment] verify that the resultant hash (computed merkle root)
     // is in the set of roots received as input
     // Note that running test.sh should create a valid proof in current circuit, even though it doesn't do anything.
+
+    var x = 1;
+    for(var i = 0; i < length; i++){
+      x *= 1 - (hashers[levels-1].hash * (1 / roots[i]));
+    }
+    out <-- x;
+    out === 0;
+
 }
 
 component main = ManyMerkleTreeChecker(2, 2, 3);

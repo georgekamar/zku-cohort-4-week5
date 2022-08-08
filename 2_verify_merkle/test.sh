@@ -1,10 +1,10 @@
-set -e 
+set -e
 if [ -f ../powersOfTau28_hez_final_16.ptau ]; then
     echo "powersOfTau28_hez_final_16.ptau already exists. Skipping."
 else
     pushd ../
     echo 'Downloading powersOfTau28_hez_final_16.ptau'
-    wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_16.ptau
+    curl https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_16.ptau --output powersOfTau28_hez_final_16.ptau
     popd
 fi
 
